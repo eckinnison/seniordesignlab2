@@ -7,7 +7,7 @@ Comments: This is the c file to sum the random numbers and output the resutle
 #include <stdlib.h>
 
 int main(int argc, char* argv[]) {
-
+ 
 
 //this part makes the file readable and reads it
     FILE *fp;
