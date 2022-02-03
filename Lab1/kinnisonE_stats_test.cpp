@@ -7,7 +7,7 @@ Comments: This is the c file to sum the random numbers and output the resutle
 #include <iostream>
 #include <fstream>
 #include <string>
-#include "kinnisone_stats.cpp"
+//#include "kinnisone_stats.cpp"
 #include "kinnisone_stats.hpp"
 
 

@@ -16,8 +16,9 @@ using namespace std;
 
 namespace ECnamespace{
     class ECclass{
+        ECclass();
+
         public:
-            ECclass();
 
 
             //setters

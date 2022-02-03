@@ -7,24 +7,25 @@ Comments: This is the c file to sum the random numbers and output the resutle
 #include <iostream>
 #include <fstream>
 #include <string>
-#include "kinnisone_stats.cpp"
+//#include "kinnisone_stats.cpp"
 #include "kinnisone_stats.hpp"
+using namespace ECnamespace;
 
 
 int main(){
-    ECclass testsrun;
 
-    std::vector<float> tester { 1, 4, 3, 5, 2};
+    ECclass myObj;
+    std::vector<float> tester { 1.0, 4.0, 3.2, 5.4, 2.8};
 
-    float maxval= testsrun.maxcalc(tester); 
+    float maxval= myObj.maxcalc(tester); 
    
     printf("max %f\n", maxval);
 
-    float minval= testsrun.mincalc(tester); 
+    float minval= ECclass::mincalc(tester); 
    
     printf("min %f\n", minval);
 
-    float meanval= testsrun.meancalc(tester); 
+    float meanval= ECclass::meancalc(tester); 
    
     printf("mean %f\n", meanval);
     return 0;
