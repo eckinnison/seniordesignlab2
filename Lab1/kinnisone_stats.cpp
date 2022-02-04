@@ -15,13 +15,13 @@ Resources:https://thispointer.com/c-how-to-read-a-file-line-by-line-into-a-vecto
 //using namespace ECnamespace;
 
 ECnamespace::ECclass::ECclass(){
-    max=0;
-    min=0;
-    mean=0;
+    float max=0;
+    float min=0;
+    float mean=0;
 }
 
 //this function helps to calculate the maximum value
-void ECnamespace::ECclass::maxcalc(std::vector<float> data){
+void ECnamespace::ECclass::set_max(std::vector<float> data){
         int index= data.size();
         int i=0;
         while (i<index){
@@ -34,7 +34,7 @@ void ECnamespace::ECclass::maxcalc(std::vector<float> data){
 }
 
 //this function helps to calculate the minimum value
-void ECnamespace::ECclass::mincalc(std::vector<float> data){
+void ECnamespace::ECclass::set_min(std::vector<float> data){
         int index= data.size();
         int i=0;
         while (i<index){
@@ -47,7 +47,7 @@ void ECnamespace::ECclass::mincalc(std::vector<float> data){
 }
 
 //this function helps to calculate the mean value
-void ECnamespace::ECclass::meancalc(std::vector<float> data){
+void ECnamespace::ECclass::set_mean(std::vector<float> data){
         int index= data.size();
         int i=0;
         float sum=0;
@@ -61,20 +61,20 @@ void ECnamespace::ECclass::meancalc(std::vector<float> data){
 
 
 // int main(){
-//     ECclass testsrun;
+//     ECnamespace::ECclass testsrun;
 
 //     std::vector<float> tester { 1, 4, 3, 5, 2};
 
-//     float maxval= testsrun.maxcalc(tester); 
+//     testsrun.set_max(tester); 
    
-//     printf("max %f\n", maxval);
+//     //printf("max %f\n", maxval);
 
-//     float minval= testsrun.mincalc(tester); 
+//     testsrun.set_min(tester); 
    
-//     printf("min %f\n", minval);
+//     //printf("min %f\n", minval);
 
-//     float meanval= testsrun.meancalc(tester); 
+//     testsrun.set_mean(tester); 
    
-//     printf("mean %f\n", meanval);
+//     //printf("mean %f\n", meanval);
 //     return 0;
 // }

@@ -22,9 +22,12 @@ namespace ECnamespace{
 
 
             //setters
-            void maxcalc(std::vector<float> data);
-            void mincalc(std::vector<float> data2);
-            void meancalc(std::vector<float> data3);
+            // void maxcalc(std::vector<float> data);
+            // void mincalc(std::vector<float> data);
+            // void meancalc(std::vector<float> data);
+            void maxcalc(float* array[]);
+            void mincalc(float* array[]);
+            void meancalc(float* array[]);
 
             //getters
 

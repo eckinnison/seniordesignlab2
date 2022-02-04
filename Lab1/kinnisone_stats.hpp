@@ -16,16 +16,29 @@ using namespace std;
 
 namespace ECnamespace{
     class ECclass{
+
         public:
-            ECclass();
 
 
             //setters
-            void maxcalc(std::vector<float> data);
-            void mincalc(std::vector<float> data2);
-            void meancalc(std::vector<float> data3);
-
+             ECclass();
+             
             //getters
+
+            float get_max(){
+                return max;
+            }
+            float get_min(){
+                return min;
+            }
+            float get_mean(){
+                return mean;
+            }
+
+            //setters
+            void set_max(std::vector<float> data);
+            void set_min(std::vector<float> data);
+            void set_mean(std::vector<float> data);
 
         private:
             float max;
