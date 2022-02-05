@@ -9,7 +9,6 @@ Comments: This is the c file to sum the random numbers and output the resutle
 
 #include <iostream>
 #include <fstream>
-#include <string>
 #include <vector> // #include directive
 
 using namespace std;
@@ -21,7 +20,7 @@ namespace ECnamespace{
 
 
             //setters
-             ECclass();
+             ECclass(float max, float min, float mean);
              
             //getters
 

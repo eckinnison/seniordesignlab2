@@ -14,10 +14,13 @@ Resources:https://thispointer.com/c-how-to-read-a-file-line-by-line-into-a-vecto
 
 //using namespace ECnamespace;
 
-ECnamespace::ECclass::ECclass(){
-    float max=0;
-    float min=0;
-    float mean=0;
+ECnamespace::ECclass::ECclass(float max, float min, float mean){
+    
+    this->max = max;
+    this->min = min;
+    this->mean = mean;
+
+
 }
 
 //this function helps to calculate the maximum value
@@ -59,15 +62,23 @@ void ECnamespace::ECclass::set_mean(std::vector<float> data){
 //        return mean;
 }
 
-
+float ECnamespace::myClass::get_max(){
+	return this->max;
+}
+float ECnamespace::myClass::get_min(){
+	return this->min;
+}
+float ECnamespace::myClass::get_mean(){
+	return this->mean;
+}
 // int main(){
 //     ECnamespace::ECclass testsrun;
 
 //     std::vector<float> tester { 1, 4, 3, 5, 2};
 
 //     testsrun.set_max(tester); 
-   
-//     //printf("max %f\n", maxval);
+//     float maxval= testsrun.get_max();
+//     printf("max %f\n", maxval);
 
 //     testsrun.set_min(tester); 
    
