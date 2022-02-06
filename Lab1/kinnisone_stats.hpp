@@ -11,8 +11,8 @@ the other two files. Helps to load data in to all the calculations
 
 #include <vector>
 #include <iostream>
-#include <fstream>
-
+#include <string>
+using std::vector;
 
 namespace tryme{
     class hell{
@@ -23,9 +23,10 @@ namespace tryme{
             float get_min();
             float get_mean();
 
-            void set_max(float* data);
-            void set_min(float* data);
-            void set_mean(float* data);
+            void set_max(vector<float> data);
+            void set_min(vector<float> data);
+            void set_mean(vector<float> data);
+            void set_histogram(vector<float> data);
 
         private:
            float max;

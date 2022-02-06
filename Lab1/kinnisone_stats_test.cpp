@@ -1,44 +1,37 @@
 #include "kinnisone_stats.hpp"
+#include <fstream>
+#include <iostream>
+#include <sstream>
+#include <iterator>
+#include <vector>
 
+using namespace std;
 
-
+ifstream myfile;
 
 int main(){
 
-    std::string filename;
-    std::cout << "Please provide the file name.\n";
-	std::cin >> filename;
+    string filename;
+    cout << "Please provide the file name.\n";
+	cin >> filename;
    
+    myfile.open(filename);
 
-    std::ifstream myfile(filename);
-    double arr[10000];
-    std::string line;   // To read each line from code
-	int count=0; 
-    
-    if (myfile.is_open())
-	{
-        while(myfile.peek()!=EOF)
-		{
-			getline(myfile, line);
-			count++;
-            std::cout << "count\n"<<count;
+    if(myfile.is_open()){
+        istream_iterator<float> start(myfile), end;
+        vector<float> data(start, end);
 
-		}
-        myfile.close();
-	}
-	else{
-     std::cout << "Unable to open file";
+        cout<< "%d\n";
+        int i=0;
+        for (int i=0; i<data.size(); i++){
+            cout<<data[i]<<endl;
+        }
+
     }
 
-    std::ifstream mynewfile(filename);
+    tryme::hell::hell whatamI;
 
-    if(mynewfile.is_open()){
-        for (int i = 0; i < count; i++)
-		{
-			mynewfile >> arr[i];
-            std::cout << "\n"<<arr[i];
-		}
-    }
+    //whatamI.set_max(data);
 
      
     return 0;
