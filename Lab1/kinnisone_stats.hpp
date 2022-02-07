@@ -23,7 +23,8 @@ namespace tryme{
             float get_min();
             float get_mean();
             float get_std();
-            float get_histogram();
+            vector<float> get_histogram_buckets();
+            vector<float> get_histogram_bucketsvals();
 
             void set_max(vector<float> data);
             void set_min(vector<float> data);

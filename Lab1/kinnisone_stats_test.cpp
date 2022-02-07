@@ -1,26 +1,34 @@
 #include "kinnisone_stats.hpp"
+#include "kinnisone_stats.cpp"
 #include <fstream>
 #include <iostream>
 #include <sstream>
 #include <iterator>
 #include <vector>
 
-using namespace std;
+using namespace tryme;
 
-ifstream myfile;
+std::ifstream myfile;
 
 
-int main(){
+int main(int argc, char** argv){
+    
+    tryme::hell whatamI;
+    std::vector<float> data;
+    std::string filename;
+    if(argc!=1){
+        std::cout << "there needs to be 1 input, thanks";
+        return 2;
+    }
 
-    string filename;
-    cout << "Please provide the file name.\n";
-	cin >> filename;
+    filename= argv[1];
+
+
    
     myfile.open(filename);
 
-    vector<float> data;
     if(myfile.is_open()){
-        istream_iterator<float> start(myfile), end;
+        std::istream_iterator<float> start(myfile), end;
         vector<float> dataget(start, end);
 
        // cout<< "%d\n";
@@ -31,11 +39,13 @@ int main(){
 
     }
 
-    tryme::hell::hell() whatamI;
-    whatamI.set_max(data);
-    whatamI.set_min(data);
-    whatamI.set_mean(data);
+        whatamI.set_max(data);
+//    // whatamI.set_min(data);
+//    // whatamI.set_mean(data);
 
+     float maximum= whatamI.get_max();
+
+    std::cout<<"max: "<<maximum<<"/n";
 
 
 

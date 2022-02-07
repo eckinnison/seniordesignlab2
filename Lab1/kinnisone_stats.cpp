@@ -26,6 +26,12 @@ float tryme::hell::get_std(){
     return this->std;
 }
 
+vector<float> tryme::hell::get_histogram_buckets(){
+    return this->buckets;
+}
+vector<float> tryme::hell::get_histogram_bucketsvals(){
+    return this->bucketvals;
+}
 void tryme::hell::set_max(vector<float> data){
     int i=0;
     float temp=0;
@@ -96,6 +102,9 @@ void tryme::hell::set_histogram(vector<float> data) {
                 if(data[i]<this->buckets[j+1]){
                     this->bucketvals[j]++;
                 }
+                else if ((data[i]<upperbound)&&(data[i]>!this->buckets[j+1])){
+                    this->bucketvals[j]++;
+                }
             }
         }
     }
@@ -124,6 +133,6 @@ double set_std(vector<float> data, float mean) {
 
 }
 
-int main(){
-    return 0;
-}
+// int main(int argc, char** argv){
+//     return 0;
+// }
