@@ -1,0 +1,7 @@
+total 4
+-rw-rw-r-- 1 kinnise 175 Feb  7 10:49 agent_smith.sh
+-rw-rw-r-- 1 kinnise   0 Feb  7 10:12 ekinnison_basicio.sh
+lrwxrwxrwx 1 kinnise   2 Feb  7 10:50 me -> me
+lrwxrwxrwx 1 kinnise   5 Feb  7 10:50 me_me -> me_me
+lrwxrwxrwx 1 kinnise   6 Feb  7 10:50 me_too -> me_too
+-rw-rw-r-- 1 kinnise   0 Feb  7 10:50 smith_list.txt
