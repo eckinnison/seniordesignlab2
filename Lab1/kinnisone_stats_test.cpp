@@ -9,6 +9,7 @@ using namespace std;
 
 ifstream myfile;
 
+
 int main(){
 
     string filename;
@@ -17,22 +18,27 @@ int main(){
    
     myfile.open(filename);
 
+    vector<float> data;
     if(myfile.is_open()){
         istream_iterator<float> start(myfile), end;
-        vector<float> data(start, end);
+        vector<float> dataget(start, end);
 
-        cout<< "%d\n";
+       // cout<< "%d\n";
         int i=0;
-        for (int i=0; i<data.size(); i++){
-            cout<<data[i]<<endl;
+        for (int i=0; i<dataget.size(); i++){
+            data[i]=dataget[i];
         }
 
     }
 
-    tryme::hell::hell whatamI;
+    tryme::hell::hell() whatamI;
+    whatamI.set_max(data);
+    whatamI.set_min(data);
+    whatamI.set_mean(data);
 
-    //whatamI.set_max(data);
 
-     
+
+
+
     return 0;
 }

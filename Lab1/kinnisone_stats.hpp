@@ -22,16 +22,23 @@ namespace tryme{
             float get_max();
             float get_min();
             float get_mean();
+            float get_std();
+            float get_histogram();
 
             void set_max(vector<float> data);
             void set_min(vector<float> data);
             void set_mean(vector<float> data);
+            void set_std(vector<float> data, float means);
             void set_histogram(vector<float> data);
 
         private:
            float max;
            float min;
            float mean; 
+           float std;
+           vector<float> buckets;
+           vector<float> bucketvals; 
+
     };
 }
 
