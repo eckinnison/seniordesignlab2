@@ -41,7 +41,6 @@ void tryme::hell::set_max(vector<float> data){
             temp=data[i];
         }
         else{
-
         }
         i++;
     }
@@ -49,14 +48,18 @@ void tryme::hell::set_max(vector<float> data){
 }
 
 void tryme::hell::set_min(vector<float> data){
-    int index=data.size();
     int i=0;
-    while(i<index){
-        if(data[i]<=this->min){
-            this->min=data[i];
+    float temp=0;
+
+    while((data[i])){
+        if(data[i]<temp){
+            temp=data[i];
+        }
+        else{
         }
         i++;
     }
+    this->min=temp;
 }
 
 void tryme::hell::set_mean(vector<float> data){
@@ -68,7 +71,8 @@ void tryme::hell::set_mean(vector<float> data){
         sum=sum+data[i];
         i++;
     }
-    this->mean=sum/index;
+    float answer=sum/index;
+    this->mean=answer;
 
 }
 
@@ -79,10 +83,6 @@ void tryme::hell::set_histogram(vector<float> data) {
     double maximum = 0;                 //initialze variables
     double minimum = 10000;
     int j = 0;
-
-   // int numbuckets = 50;
-    vector<int> buckets;
-    vector<int> bucketvals;
 
 
     double width = 0.4*(this->std); //calc the size of the buckets
@@ -113,11 +113,11 @@ void tryme::hell::set_histogram(vector<float> data) {
 /*
 This function calculates the standard deviation of the selected columnS
 */
-double set_std(vector<float> data, float mean) {
+void tryme::hell::set_std(vector<float> data, float mean) {
     //tryme::hell::hell whatamI;
 
-    double var = 0;                                 //initialize variables
-    double sum = 0;
+    float var = 0;                                 //initialize variables
+    float sum = 0;
     int numrows= data.size();
     int i = 0;
 
@@ -127,10 +127,9 @@ double set_std(vector<float> data, float mean) {
     var = sum / (numrows-1 );                       //the varience is equal to the summation divided by the number of rows-1
 
 
-    double std = sqrt(var);                         //the standard deviation is the square root of the varience
+    float temp = sqrt(var);                         //the standard deviation is the square root of the varience
 
-    return std;                                     //return the standard deviation
-
+    this->std=temp;
 }
 
 // int main(int argc, char** argv){

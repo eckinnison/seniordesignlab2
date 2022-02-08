@@ -29,7 +29,7 @@ namespace tryme{
             void set_max(vector<float> data);
             void set_min(vector<float> data);
             void set_mean(vector<float> data);
-            void set_std(vector<float> data, float means);
+            void set_std(vector<float> data, float mean);
             void set_histogram(vector<float> data);
 
         private:

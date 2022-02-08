@@ -13,41 +13,43 @@ std::ifstream myfile;
 
 int main(int argc, char** argv){
     
+    std::cout << "here\n";
+
     tryme::hell whatamI;
     std::vector<float> data;
     std::string filename;
-    if(argc!=1){
-        std::cout << "there needs to be 1 input, thanks";
-        return 2;
-    }
-
-    filename= argv[1];
-
-
+    std::cout << "Please provide the file name.\n";
+	std::cin >> filename;
    
     myfile.open(filename);
 
     if(myfile.is_open()){
         std::istream_iterator<float> start(myfile), end;
-        vector<float> dataget(start, end);
+        vector<float> data(start, end);
 
-       // cout<< "%d\n";
         int i=0;
-        for (int i=0; i<dataget.size(); i++){
-            data[i]=dataget[i];
-        }
-
-    }
-
+        
         whatamI.set_max(data);
-//    // whatamI.set_min(data);
-//    // whatamI.set_mean(data);
+        float maximum= whatamI.get_max();
+        std::cout<<"max: "<<maximum<<"\n";
 
-     float maximum= whatamI.get_max();
+        whatamI.set_min(data);
+        float minimum= whatamI.get_min();
+        std::cout<<"min: "<<minimum<<"\n";
 
-    std::cout<<"max: "<<maximum<<"/n";
+        whatamI.set_mean(data);
+        float mean= whatamI.get_mean();
+        std::cout<<"mean: "<<mean<<"\n";
 
-
+        whatamI.set_std(data, mean);
+        float std= whatamI.get_std();
+        std::cout<<"std: "<<std<<"\n";
+        
+        // whatamI.set_histogram(data);
+        // std::vector<float> buckets= whatamI.get_histogram_buckets();
+        // std::cout<<"buckets: "<< buckets[0] <<"\n";
+        
+    }
 
 
     return 0;
