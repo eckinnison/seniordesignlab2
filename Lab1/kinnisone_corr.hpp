@@ -15,9 +15,9 @@ Comments: This corresponding shows how similar two data sets are
 #include "kinnisone_stats.hpp"
 using std::vector;
 
-    namespace imgood{
-        class heaven{
-            public:
+    namespace imgood{       //this is my namespace, I was less frustrated this time
+        class heaven{       //this is my class, named to balence out the last class
+            public:             //just make sure all the functions work
                 heaven();
                 float get_cor();
                 void set_cor(vector<float> data, vector<float> data2);

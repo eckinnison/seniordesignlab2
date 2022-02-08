@@ -14,9 +14,9 @@ the other two files. Helps to load data in to all the calculations
 #include <string>
 using std::vector;
 
-namespace tryme{
-    class hell{
-        public:
+namespace tryme{        //this is my namespace, I was very frustrated when making this
+    class hell{         //this is my class because I thought using the classes was very not fun
+        public:         //just make all the functions work
             hell();
 
             float get_max();
