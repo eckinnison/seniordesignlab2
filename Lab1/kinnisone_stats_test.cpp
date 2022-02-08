@@ -13,8 +13,6 @@ std::ifstream myfile;
 
 int main(int argc, char** argv){
     
-    std::cout << "here\n";
-
     tryme::hell whatamI;
     std::vector<float> data;
     std::string filename;
@@ -28,6 +26,7 @@ int main(int argc, char** argv){
         vector<float> data(start, end);
 
         int i=0;
+        std::cout<<"numbnerof data points: "<<data.size()<<"\n";
         
         whatamI.set_max(data);
         float maximum= whatamI.get_max();
@@ -45,10 +44,21 @@ int main(int argc, char** argv){
         float std= whatamI.get_std();
         std::cout<<"std: "<<std<<"\n";
         
-        // whatamI.set_histogram(data);
-        // std::vector<float> buckets= whatamI.get_histogram_buckets();
-        // std::cout<<"buckets: "<< buckets[0] <<"\n";
-        
+        whatamI.set_histogram(data);
+        std::vector<float> buckets= whatamI.get_histogram_buckets();
+        std::vector<float> bucketvals= whatamI.get_histogram_bucketsvals();
+                std::cout<<"\n \n \n \t \t Histogram\n\n\n";
+
+        for(int i=0; i<buckets.size();i++){
+            std::cout<<buckets[i] <<" <-> "<<buckets[i+1];
+            for(int j=0;j<bucketvals[i];j++){
+                std::cout<<"=";
+            }
+            std::cout<<"\n";
+
+        }
+
+
     }
 
 

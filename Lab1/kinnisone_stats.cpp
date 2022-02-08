@@ -79,35 +79,46 @@ void tryme::hell::set_mean(vector<float> data){
 
 //this is a work in progrss histogram function it is not done yet at all
 void tryme::hell::set_histogram(vector<float> data) {
-  
-    double maximum = 0;                 //initialze variables
-    double minimum = 10000;
+
+    float maximum = 0;                 //initialze variables
+    float minimum = 10000;
     int j = 0;
 
-
-    double width = 0.4*(this->std); //calc the size of the buckets
-    double upperbound = this->mean+( 3*(this->std)); //calc the size of the buckets
-    double lowerbound= this->mean-(3*(this->std));
-    int indexer=lowerbound+width;
+    float width = 0.4*(this->std); //calc the size of the buckets
+    float upperbound = this->mean+( 3*(this->std)); //calc the size of the buckets
+    float lowerbound= this->mean-(3*(this->std));
+    float indexer=upperbound-width;
     int i=1;
-    buckets[0]=lowerbound;
-    while(indexer<upperbound){
-        this->buckets[i]=indexer;
-        indexer=indexer+width;
+
+        this->buckets.insert(buckets.begin(), upperbound);
+
+    while(indexer>lowerbound){
+        vector<float>::iterator testing= this->buckets.insert(buckets.begin(),1, indexer);
+        indexer=indexer-width;
         i++;
+        
+
+    }
+    
+    int arr[buckets.size()];
+    for(int j=0; j<this->buckets.size(); j++){
+        arr[j]=0;
     }
     for(int i=0; i<data.size();i++){
         for(int j=0; j<this->buckets.size(); j++){
             if(data[i]>=this->buckets[j]){
                 if(data[i]<this->buckets[j+1]){
-                    this->bucketvals[j]++;
-                }
-                else if ((data[i]<upperbound)&&(data[i]>!this->buckets[j+1])){
-                    this->bucketvals[j]++;
+                    arr[j]++;
                 }
             }
         }
     }
+
+    for(int i=0;i<buckets.size();i++){
+        vector<float>::iterator testing2= this->bucketvals.insert(bucketvals.begin(),1, arr[i]);
+    }
+
+     
 }
 
 /*

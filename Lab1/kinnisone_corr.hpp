@@ -2,7 +2,7 @@
 Name: Emma Claire Kinnison
 Date:2/6/21
 Assignment: Lab 1
-Comments: This is the header file for the corelation program
+Comments: This corresponding shows how similar two data sets are
 
 */
 
