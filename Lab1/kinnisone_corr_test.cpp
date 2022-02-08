@@ -40,5 +40,9 @@ int main(int argc, char** argv){
         float corr= iamthis.get_cor();
         std::cout<<"corr: "<<corr<<"\n";
     }
+    else{
+        std::cout<<"Couldnt read datafiles\n";
+        return 1;
+    }
     return 0;
 }
