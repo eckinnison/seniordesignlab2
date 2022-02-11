@@ -15,8 +15,13 @@ int main(int argc, char** argv){
     tryme::hell whatamI;                //make the object and vector and file name
     std::vector<float> data;
     std::string filename;
-    std::cout << "Please provide the file name.\n";     //get the file names
-	std::cin >> filename;
+	if(argv[1]!=NULL){
+        filename =argv[1];
+    }
+    else{
+        std::cout<<"Error: No arguments\n";
+            return 8;
+    }
     
     myfile.open(filename);                              //open the files
 

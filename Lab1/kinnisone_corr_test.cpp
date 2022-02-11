@@ -16,14 +16,25 @@ int main(int argc, char** argv){
 
     std::vector<float> data;        //create data vector
     std::string filename;           //make and get the filename
-    std::cout << "Please provide the file name.\n";
-	std::cin >> filename;
+    //std::cout << "Please provide the file name.\n";
+    if (argv[1]!= NULL){
+        	filename =argv[1];
+    }
+    else{
+        std::cout<<"Error: first argument missing!\n";
+         return 8;
+    }
 
     std::vector<float> data2;       //create a second data vector
     std::string filename2;          //make and get the second filename
-    std::cout << "Please provide a second file name.\n";
-	std::cin >> filename2;
-
+    //std::cout << "Please provide a second file name.\n";
+    if (argv[2]!= NULL){
+        	filename2 =argv[2];
+    }
+    else{
+        std::cout<<"Error: second argument missing!\n";
+         return 9;
+    }
     myfile.open(filename);      //open both files
     myfile2.open(filename2);
 
@@ -44,7 +55,7 @@ int main(int argc, char** argv){
 
         iamthis.set_cor(data, data2);                       //set the corresponding value
         float corr= iamthis.get_cor();                      //get and print it
-        std::cout<<"corr: "<<corr<<"\n";
+        std::cout<<", "<<corr<<"";
     }
     else{                                                   //throw an error if either file doesnt exist
         std::cout<<"Error: Couldn't open one or both of the datafiles\n";
