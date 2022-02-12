@@ -75,15 +75,15 @@ then
     index2=2
     end=".txt"
     vs=" vs. "
-    echo $index$vs$index2 >conc_corr_00.txt
-    ./corcpptest $first$index$end $first$index2$end >>conc_corr_00.txt
+    ./corcpptest $first$index$end $first$index2$end >conc_corr_00.txt
+    echo $index$vs$index2 >>conc_corr_00.txt
 
     while [ $index -le 58 ]
     do
         index=$((index+1))
         index2=$((index2+1))
-        echo $index$vs$index2 >>conc_corr_00.txt
         ./corcpptest $first$index$end $first$index2$end >> conc_corr_00.txt
+        echo $index$vs$index2 >>conc_corr_00.txt
     done
     
 elif [ $userin == "ERP05" ];
@@ -92,16 +92,17 @@ then
     index=1
     index2=2
     end=".txt"
-        echo $index$vs$index2 >conc_corr_05.txt
+    vs=" vs. "
 
-        ./corcpptest $first$index$end $first$index2$end 2>&1 | tee conc_corr_05.txt
+        ./corcpptest $first$index$end $first$index2$end > conc_corr_05.txt
+        echo $index$vs$index2 >>conc_corr_05.txt
 
     while [ $index -le 58 ]
     do
         index=$((index+1))
         index2=$((index2+1))
+        ./corcpptest $first$index$end $first$index2$end >> conc_corr_05.txt
         echo $index$vs$index2 >>conc_corr_05.txt
-        ./corcpptest $first$index$end $first$index2$end 2>&1 | tee conc_corr_05.txt
 
     done
     

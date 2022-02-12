@@ -55,7 +55,7 @@ int main(int argc, char** argv){
 
         iamthis.set_cor(data, data2);                       //set the corresponding value
         float corr= iamthis.get_cor();                      //get and print it
-        std::cout<<", "<<corr<<"";
+        std::cout<<" "<<corr<<", ";
     }
     else{                                                   //throw an error if either file doesnt exist
         std::cout<<"Error: Couldn't open one or both of the datafiles\n";
