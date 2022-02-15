@@ -22,7 +22,7 @@ Comments: The objective of this code is to hack time(whatever that means)
                 void setObjectToHack(std::string objectname);
                 int getTimeToHack();
                 std::string getObjectToHack();
-                int hackTime();
+                void hackTime();
             private:
                 int time_to_hack;
                 std::string objectToHack;
