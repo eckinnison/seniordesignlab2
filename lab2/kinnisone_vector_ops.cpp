@@ -38,3 +38,7 @@ vector<float> banana::pie::get_arr_sub(){
 vector<float> banana::pie::get_div_arr(){
     return this->div;
 }
+
+
+int main(int argc, char** argv){
+}
