@@ -27,11 +27,13 @@ using std::vector;
                 vector<float> get_arr_sub();
                 void set_arr_sub(vector<float> data, vector<float> data2 );
                 vector<float> get_div_arr();
-                void set_div_arr(vector<float> data);
+                void set_div_arr(vector<float> data, float val);
 
             private:
                 float sum;
                 vector<float> sub;
+                vector<float> div;
+
         };
     }
 
