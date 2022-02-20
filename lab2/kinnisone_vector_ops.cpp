@@ -1,10 +1,12 @@
 #include "kinnisone_vector_ops.hpp"
 #include <math.h>
+#include<algorithm>
+#include <vector>
 
 banana::pie::pie(){
     this->sum=0;
-    this->sub.push_back(0);
-    this->div.push_back(0);
+    this->sub.push_back(0); //this is wrong but core dumps
+    this->div.push_back(0);//this is wrong but core dumps
 }
 
 
@@ -21,8 +23,15 @@ void banana::pie::set_arr_sub(vector<float> data, vector<float> data2){
 }
 
 void banana::pie::set_div_arr(vector<float> data, float val){
+        printf("data.size(): %f\n",data.size());
+
+    
     for(int i=0; i<data.size(); i++){
-        this->div[i]= data[i]/val;
+        this->div[i]= data[i]*(1/val);
+        printf("data: %f\n",data[i]);
+       // this->div= Vector.Divide(data, val);
+       printf("div: %f\n", this->div[i]);
+        printf("val: %f\n", val);
     }
 }
 
@@ -39,6 +48,3 @@ vector<float> banana::pie::get_div_arr(){
     return this->div;
 }
 
-
-int main(int argc, char** argv){
-}

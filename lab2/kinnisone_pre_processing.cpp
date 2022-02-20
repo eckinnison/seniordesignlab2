@@ -1,5 +1,6 @@
-#include "kinnisone_pre_processing.hpp"
+#include "kinnisone_stats.hpp"
 #include "kinnisone_vector_ops.hpp"
+#include "kinnisone_pre_processing.hpp"
 #include <math.h>
 #include <fstream>
 #include <iostream>
@@ -13,16 +14,35 @@ std::ifstream myfile3;
 std::ifstream myfile4;
 std::ifstream myfile5;
 
+pizza::toppings::toppings(){
+    this->log_ratio.push_back(0);
+}
 
+vector<float> pizza::toppings::get_log_ratio(){
+    return this->log_ratio;
+}
+
+void pizza::toppings::set_log_ratio(vector<float> data, vector<float> data2){
+
+    for(int i=0; i<data.size();i++){
+        this->log_ratio[i]=log(data[i]/data2[i]);
+    }
+
+}
+
+std::ofstream finalfile;
 
 int main(int argc, char** argv){
+    banana::pie obj;
+    tryme::hell calc;
+    pizza::toppings bacon;
 
     std::string redcellfile;
     std::string backgroundredfile;
     std::string greencellfile;
     std::string backgroundgreenfile;
     std::string calidatafile;
-    float genenum;
+    int genenum;
 
 	if(argv[1]!=NULL){
         redcellfile =argv[1];
@@ -65,10 +85,10 @@ int main(int argc, char** argv){
     } 
 
     if(argv[6]!=NULL){
-        genenum =atof(argv[6]);
+        genenum =atoi(argv[6]);
     }
     else{
-        std::cout<<"Error: No green background file\n";
+        std::cout<<"Error: No number of genes\n";
             return 6;
     } 
 
@@ -78,17 +98,54 @@ int main(int argc, char** argv){
     myfile4.open(backgroundgreenfile);                              //open the files
 
     if((myfile.is_open())&&(myfile2.is_open())&&(myfile3.is_open())&&(myfile4.is_open())){
-        std::istream_iterator<float> start(myfile), end;    //get the data for file one
+        std::istream_iterator<float> start(myfile), end;    //get the red data for file one
         std::vector<float> data(start, end);
-        std::istream_iterator<float> start2(myfile2), end2; //get the data for file two
+        std::istream_iterator<float> start2(myfile2), end2; //get the red background data for file two
         std::vector<float> data2(start2, end2);  
-        std::istream_iterator<float> start3(myfile3), end3;    //get the data for file one
+        std::istream_iterator<float> start3(myfile3), end3;    //get the green data for file one
         std::vector<float> data3(start3, end3);
-        std::istream_iterator<float> start4(myfile4), end4; //get the data for file two
+        std::istream_iterator<float> start4(myfile4), end4; //get the green background data for file two
         std::vector<float> data4(start4, end4); 
 
-        if((genenum>data.size())||(genenum>data2.size())||(genenum>data3.size())||(genenum>data4.size())){
-            banana::pie obj;
+
+        if((genenum<=data.size())||(genenum<=data2.size())||(genenum<=data3.size())||(genenum<=data4.size())){
+            obj.set_arr_sub(data, data2);
+            std::vector<float> subred = obj.get_arr_sub();
+            printf("size subred: %f\n", subred.size());
+            obj.set_arr_sub(data3, data4);
+            std::vector<float> subgreen = obj.get_arr_sub();
+
+            calc.set_mean(subred);
+            float meanred= calc.get_mean();
+            printf("meanred: %f\n", meanred);
+
+            calc.set_mean(subgreen);
+            float meangreen= calc.get_mean();
+            printf("meangreen: %f\n", meangreen);
+
+            obj.set_div_arr(subred, meanred);
+            std::vector<float> normred = obj.get_div_arr();
+            obj.set_div_arr(subgreen, meangreen);
+            std::vector<float> normgreen = obj.get_div_arr();
+            printf("normred[2]: %i\n", normred[2]);
+            printf("normgreen[2]: %i\n", normgreen[2]);
+
+            bacon.set_log_ratio(normred, normgreen);
+            std::vector<float> intense_ratio =bacon.get_log_ratio();
+        printf("here2\n");
+
+            finalfile.open(calidatafile);
+                    printf("here3\n");
+            printf("intense_ratio.size(): %i\n", intense_ratio.size());
+
+            for (int j=0; j<intense_ratio.size();j++){
+                finalfile << intense_ratio[j]<<"\n";
+                        printf("here4\n");
+
+            }
+            finalfile.close();
+                    printf("here5\n");
+
         }
         else{
             std::cout<<"Error: Data file too small for number of genes requested\n";
@@ -123,7 +180,5 @@ int main(int argc, char** argv){
             
         }
     }
-
-
-
+    return 0;
 }

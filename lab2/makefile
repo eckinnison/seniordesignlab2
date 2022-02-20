@@ -12,7 +12,10 @@ vector_ops.o: kinnisone_vector_ops.hpp kinnisone_vector_ops.cpp
 lab1_stats.o: kinnisone_stats.hpp kinnisone_stats.cpp kinnisone_stats_test.cpp 
 			  g++ -o cppstats $^
 
-all: vector_ops.o lab1_stats.o 
+preprocess.o: kinnisone_pre_processing.cpp kinnisone_pre_processing.hpp
+			  g++ -o preprocess $^
+
+all: vector_ops.o lab1_stats.o preprocess.o
 
 clean:
 		rm -f *.o 

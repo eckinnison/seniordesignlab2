@@ -11,7 +11,6 @@ std::ifstream myfile;
 
 
 int main(int argc, char** argv){
-    
     tryme::hell whatamI;                //make the object and vector and file name
     std::vector<float> data;
     std::string filename;
