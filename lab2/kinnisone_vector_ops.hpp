@@ -37,8 +37,4 @@ using std::vector;
         };
     }
 
-
-
-
-
 #endif
