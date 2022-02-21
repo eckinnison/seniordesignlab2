@@ -27,7 +27,7 @@ void pizza::toppings::set_log_ratio(vector<float> data, vector<float> data2){
     float arr[data.size()];    //make an array to count data points in each bucket
 
     for(int i=0; i<data.size();i++){
-        arr[i]=log(data[i]/data2[i]);
+        arr[i]=log10(data[i]/data2[i]);
         vector<float>::iterator testing2= this->log_ratio.insert(log_ratio.begin(), 1, arr[i]);    //load the bucketvals with the array values
     }
 
@@ -114,31 +114,25 @@ int main(int argc, char** argv){
         if((genenum<=data.size())||(genenum<=data2.size())||(genenum<=data3.size())||(genenum<=data4.size())){
             obj.set_arr_sub(data, data2);
             std::vector<float> subred = obj.get_arr_sub();
-            printf("size subred: %f\n", subred.size());
             obj.set_arr_sub(data3, data4);
             std::vector<float> subgreen = obj.get_arr_sub();
 
             calc.set_mean(subred);
             float meanred= calc.get_mean();
-            printf("meanred: %f\n", meanred);
 
             calc.set_mean(subgreen);
             float meangreen= calc.get_mean();
-            printf("meangreen: %f\n", meangreen);
 
             obj.set_div_arr(subred, meanred);
             std::vector<float> normred = obj.get_div_arr();
             obj.set_div_arr(subgreen, meangreen);
             std::vector<float> normgreen = obj.get_div_arr();
-            printf("normred[2]: %i\n", normred[2]);
-            printf("normgreen[2]: %i\n", normgreen[2]);
+            
 
             bacon.set_log_ratio(normred, normgreen);
             std::vector<float> intense_ratio =bacon.get_log_ratio();
 
             finalfile.open(calidatafile);
-                    printf("here3\n");
-            printf("intense_ratio.size(): %i\n", intense_ratio.size());
 
             for (int j=0; j<intense_ratio.size();j++){
                 finalfile << intense_ratio[j]<<"\n";

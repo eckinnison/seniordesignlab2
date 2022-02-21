@@ -129,8 +129,6 @@ void tryme::hell::set_histogram(vector<float> data) {
         vector<float>::iterator testing= this->buckets.insert(buckets.begin(),1, indexer);
         indexer=indexer-width;
         i++;
-        
-
     }
     
     int arr[buckets.size()];    //make an array to count data points in each bucket

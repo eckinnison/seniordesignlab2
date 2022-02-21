@@ -5,8 +5,8 @@
 
 banana::pie::pie(){
     this->sum=0;
-    this->sub; //this is wrong but core dumps
-    this->div;//this is wrong but core dumps
+    this->sub; 
+    this->div;
 }
 
 
@@ -18,23 +18,27 @@ void banana::pie::set_arr_sum(vector<float> data){
 
 void banana::pie::set_arr_sub(vector<float> data, vector<float> data2){
     float arr[data.size()];    //make an array to count data points in each bucket
+    float starter= data[0]-data2[0];
 
-    for(int i=0; i<data.size(); i++){
+    this->sub.insert(sub.begin(), starter);  //start the vector
+
+    for(int i=1; i<data.size(); i++){
         arr[i]= data[i]-data2[i];
-        vector<float>::iterator testing2= this->sub.insert(sub.begin(), 1, arr[i]);    //load the bucketvals with the array values
+        vector<float>::iterator testing2= this->sub.insert(sub.end(), 1, arr[i]);    //load the bucketvals with the array values
+        
     }
-    printf("sub(): %f\n",data.size());
 
 }
 
 void banana::pie::set_div_arr(vector<float> data, float val){
-    printf("data.size(): %f\n",data.size());
     float arr[data.size()];    //make an array to count data points in each bucket
 
-    
-    for(int i=0; i<data.size(); i++){
+    float starter= data[0]*(1/val);
+
+    this->div.insert(div.begin(), starter);  //start the vector
+    for(int i=1; i<data.size(); i++){
         arr[i]= data[i]*(1/val);
-        vector<float>::iterator testing2= this->div.insert(div.begin(), 1, arr[i]);    //load the bucketvals with the array values
+        vector<float>::iterator testing2= this->div.insert(div.end(), 1, arr[i]);    //load the bucketvals with the array values
     }
 }
 
