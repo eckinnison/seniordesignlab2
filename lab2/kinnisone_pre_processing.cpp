@@ -135,7 +135,6 @@ int main(int argc, char** argv){
 
             bacon.set_log_ratio(normred, normgreen);
             std::vector<float> intense_ratio =bacon.get_log_ratio();
-        printf("here2\n");
 
             finalfile.open(calidatafile);
                     printf("here3\n");
@@ -143,11 +142,8 @@ int main(int argc, char** argv){
 
             for (int j=0; j<intense_ratio.size();j++){
                 finalfile << intense_ratio[j]<<"\n";
-                        printf("here4\n");
-
             }
             finalfile.close();
-                    printf("here5\n");
 
         }
         else{

@@ -23,6 +23,7 @@ void banana::pie::set_arr_sub(vector<float> data, vector<float> data2){
         arr[i]= data[i]-data2[i];
         vector<float>::iterator testing2= this->sub.insert(sub.begin(), 1, arr[i]);    //load the bucketvals with the array values
     }
+    printf("sub(): %f\n",data.size());
 
 }
 
@@ -33,7 +34,7 @@ void banana::pie::set_div_arr(vector<float> data, float val){
     
     for(int i=0; i<data.size(); i++){
         arr[i]= data[i]*(1/val);
-        vector<float>::iterator testing2= this->sub.insert(sub.begin(), 1, arr[i]);    //load the bucketvals with the array values
+        vector<float>::iterator testing2= this->div.insert(div.begin(), 1, arr[i]);    //load the bucketvals with the array values
     }
 }
 
@@ -50,6 +51,3 @@ vector<float> banana::pie::get_div_arr(){
     return this->div;
 }
 
-int main(int argc, char** argv){
-    return 0;
-}
