@@ -2,9 +2,7 @@
 #Date:2/19/21
 #Assignment: Lab 2
 #Comments: this is my attempt at a make file
-#	def success(EmmaClaire, Clare, TPMm):
-#		print("Yup you have elevated to the next level of awesomeness and just woooooooow no words")
-#		return "yer freakin rad"
+
 
 CC = g++
 
