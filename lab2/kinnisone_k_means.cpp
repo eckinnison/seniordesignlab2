@@ -106,56 +106,56 @@ int main(int argc, char** argv){
             for(int j=0;j<data.size();j++){     //tab through all the data to sort it
                        
 
-                        suppressed_cluster.set_cluster_mean(suppressed_cluser_mean);
-                        suppressed_cluster.set_distance(data[j]);
-                        suppressed_distance=suppressed_cluster.get_distance();
+                suppressed_cluster.set_cluster_mean(suppressed_cluser_mean);
+                suppressed_cluster.set_distance(data[j]);
+                suppressed_distance=suppressed_cluster.get_distance();
+            
+                
+                stationary_cluster.set_cluster_mean(stationary_cluser_mean);
+                stationary_cluster.set_distance(data[j]);
+                stationary_distance=stationary_cluster.get_distance();
+
                     
-                      
-                        stationary_cluster.set_cluster_mean(stationary_cluser_mean);
-                        stationary_cluster.set_distance(data[j]);
-                        stationary_distance=stationary_cluster.get_distance();
+                expressed_cluster.set_cluster_mean(expressed_cluser_mean);
+                expressed_cluster.set_distance(data[j]);
+                expressed_distance=expressed_cluster.get_distance();
+            
 
-                         
-                        expressed_cluster.set_cluster_mean(expressed_cluser_mean);
-                        expressed_cluster.set_distance(data[j]);
-                        expressed_distance=expressed_cluster.get_distance();
-                    
-
-                    if((suppressed_distance<stationary_distance)&&(suppressed_distance<expressed_distance)){
-                        if(cluster1.size()==0){
-                            cluster1.insert(cluster1.begin(), data[j]);
-                            suppressed.insert(suppressed.begin(),j);
-                            //printf("here7\n");
-                        }
-                        else{
-                            vector<float>::iterator testing1= cluster1.insert(cluster1.end(), 1, data[j]);    //load the bucketvals with the array values
-                            vector<float>::iterator testing4= suppressed.insert(suppressed.end(), 1, j);    //load the bucketvals with the array values
-
-                        }
-                    }
-                    else if((stationary_distance<=suppressed_distance)&&(stationary_distance<=expressed_distance)){
-                        if(cluster2.size()==0){
-                            cluster2.insert(cluster2.begin(), data[j]);
-                            stationary.insert(stationary.begin(),j);
-                            //printf("here8\n");
-                        }
-                        else{
-                            vector<float>::iterator testing2= cluster2.insert(cluster2.end(), 1, data[j]);    //load the bucketvals with the array values
-                            vector<float>::iterator testing5= stationary.insert(stationary.end(), 1, j);    //load the bucketvals with the array values
-
-                        }
+                if((suppressed_distance<stationary_distance)&&(suppressed_distance<expressed_distance)){
+                    if(cluster1.size()==0){
+                        cluster1.insert(cluster1.begin(), data[j]);
+                        suppressed.insert(suppressed.begin(),j);
+                        //printf("here7\n");
                     }
                     else{
-                        if(cluster3.size()==0){
-                            cluster3.insert(cluster3.begin(), data[j]);
-                            expressed.insert(expressed.begin(),j);                            
-                            //printf("here8\n");
-                        }
-                        else{
-                            vector<float>::iterator testing3= cluster3.insert(cluster3.end(), 1, data[j]);    //load the bucketvals with the array values
-                            vector<float>::iterator testing6= expressed.insert(expressed.end(), 1, j);    //load the bucketvals with the array values
-                        }
-                    }  
+                        vector<float>::iterator testing1= cluster1.insert(cluster1.end(), 1, data[j]);    //load the bucketvals with the array values
+                        vector<float>::iterator testing4= suppressed.insert(suppressed.end(), 1, j);    //load the bucketvals with the array values
+
+                    }
+                }
+                else if((stationary_distance<=suppressed_distance)&&(stationary_distance<=expressed_distance)){
+                    if(cluster2.size()==0){
+                        cluster2.insert(cluster2.begin(), data[j]);
+                        stationary.insert(stationary.begin(),j);
+                        //printf("here8\n");
+                    }
+                    else{
+                        vector<float>::iterator testing2= cluster2.insert(cluster2.end(), 1, data[j]);    //load the bucketvals with the array values
+                        vector<float>::iterator testing5= stationary.insert(stationary.end(), 1, j);    //load the bucketvals with the array values
+
+                    }
+                }
+                else{
+                    if(cluster3.size()==0){
+                        cluster3.insert(cluster3.begin(), data[j]);
+                        expressed.insert(expressed.begin(),j);                            
+                        //printf("here8\n");
+                    }
+                    else{
+                        vector<float>::iterator testing3= cluster3.insert(cluster3.end(), 1, data[j]);    //load the bucketvals with the array values
+                        vector<float>::iterator testing6= expressed.insert(expressed.end(), 1, j);    //load the bucketvals with the array values
+                    }
+                }  
                 
             }
             
@@ -179,27 +179,27 @@ int main(int argc, char** argv){
         printf("Final mean 2: %f\n",stationary_cluser_mean );
         printf("Final mean 3: %f\n",expressed_cluser_mean );
            
-            expressedfile.open("expressed_genes.txt");
-            suppressedfile.open("suppressed_genes.txt");
-            stationaryfile.open("stationary_genes.txt");
-            int a=0;
-            int b=0;
-            int c=0;
+        expressedfile.open("expressed_genes.txt");
+        suppressedfile.open("suppressed_genes.txt");
+        stationaryfile.open("stationary_genes.txt");
+        int a=0;
+        int b=0;
+        int c=0;
 
-            for (int z=0; z<data.size(); z++){
-                if(z==expressed[a]){
-                    expressedfile<<data2[z]<<"\n";
-                    a++;
-                }
-                if(z==suppressed[b]){
-                    suppressedfile<<data2[z]<<"\n";
-                    b++;
-                }
-                if(z==stationary[c]){
-                    stationaryfile<<data2[z]<<"\n";
-                    c++;
-                }
+        for (int z=0; z<data.size(); z++){
+            if(z==expressed[a]){
+                expressedfile<<data2[z]<<"\n";
+                a++;
             }
+            if(z==suppressed[b]){
+                suppressedfile<<data2[z]<<"\n";
+                b++;
+            }
+            if(z==stationary[c]){
+                stationaryfile<<data2[z]<<"\n";
+                c++;
+            }
+        }
             
             //expressedfile << expressed_cluser_mean<<"\n";
             //suppressedfile << suppressed_cluser_mean<<"\n";
@@ -212,7 +212,7 @@ int main(int argc, char** argv){
             return 1;
         }
     }
-                printf("done\n");
+    printf("done\n");
 
     return 0;
 }
