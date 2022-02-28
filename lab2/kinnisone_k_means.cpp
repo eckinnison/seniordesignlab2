@@ -65,7 +65,13 @@ int main(int argc, char** argv){
     std::string lograt_file;
     std::string gene_file;
     gene_file="gene_list.txt";
-    lograt_file="IR.dat";
+    if(argv[1]!=NULL){
+        lograt_file=argv[1];
+    }
+    else{
+        std::cout<<"Error: No input file\n";
+            return 1;
+    }  
     myfile.open(lograt_file);
     myfile2.open(gene_file);
 
@@ -191,24 +197,24 @@ int main(int argc, char** argv){
                 expressedfile<<data2[z]<<"\n";
                 a++;
             }
-            if(z==suppressed[b]){
+            else if(z==suppressed[b]){
                 suppressedfile<<data2[z]<<"\n";
                 b++;
             }
-            if(z==stationary[c]){
+            else if(z==stationary[c]){
                 stationaryfile<<data2[z]<<"\n";
                 c++;
             }
         }
-            
-            //expressedfile << expressed_cluser_mean<<"\n";
-            //suppressedfile << suppressed_cluser_mean<<"\n";
-           // stationaryfile << stationary_cluser_mean<<"\n";
+        expressedfile.close();
+        suppressedfile.close();
+        stationaryfile.close();
+        
 
     }
     else{
         if(!(myfile.is_open())){
-            std::cout<<"Error: IR.dat cant be found\n";
+            std::cout<<"Error: .dat file cant be found\n";
             return 1;
         }
     }
