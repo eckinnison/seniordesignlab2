@@ -4,15 +4,13 @@
 ##comments:This is my shell script for lab 2 part 4 part b
 
 
-echo "Which jean do you want to check?"
+echo "Which gene do you want to check?"
 
 read userin
 
 if grep -Fxq "$userin" expressed_genes_total.txt
 then
     echo "Expressed"
-
-
 else
     if grep -Fxq "$userin" suppressed_genes_total.txt
     then
