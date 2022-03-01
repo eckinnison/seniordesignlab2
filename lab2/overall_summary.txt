@@ -1,0 +1,71 @@
+Summary file
+This is second #0
+Final mean 1: -0.706812
+Final mean 2: -0.025005
+Final mean 3: 0.635401
+Number of expressed Genes:
+1684
+Number of suppressed Genes:
+1406
+Number of stationary Genes:
+3028
+This is second #1
+Final mean 1: -0.634394
+Final mean 2: 0.004015
+Final mean 3: 0.636409
+Number of expressed Genes:
+1466
+Number of suppressed Genes:
+1490
+Number of stationary Genes:
+3162
+This is second #2
+Final mean 1: -0.662452
+Final mean 2: -0.034069
+Final mean 3: 0.566468
+Number of expressed Genes:
+1686
+Number of suppressed Genes:
+1278
+Number of stationary Genes:
+3154
+This is second #3
+Final mean 1: -0.615159
+Final mean 2: 0.000072
+Final mean 3: 0.606024
+Number of expressed Genes:
+1541
+Number of suppressed Genes:
+1517
+Number of stationary Genes:
+3060
+This is second #4
+Final mean 1: -0.703908
+Final mean 2: -0.025254
+Final mean 3: 0.637710
+Number of expressed Genes:
+1711
+Number of suppressed Genes:
+1443
+Number of stationary Genes:
+2964
+This is second #5
+Final mean 1: -0.690979
+Final mean 2: -0.011945
+Final mean 3: 0.665887
+Number of expressed Genes:
+1650
+Number of suppressed Genes:
+1539
+Number of stationary Genes:
+2929
+This is second #6
+Final mean 1: -0.718929
+Final mean 2: -0.000582
+Final mean 3: 0.734813
+Number of expressed Genes:
+1498
+Number of suppressed Genes:
+1529
+Number of stationary Genes:
+3091

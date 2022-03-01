@@ -63,32 +63,32 @@ dat=".dat"
 log_rat="log_ratio_"
 index=0
 input="input"
-
+echo "Summary file" > "overall_summary.txt"
 while [ $index -le $second ]
 do
      ./preprocess $data$red$index$dat $data$red_back$index$dat  $data$green$index$dat  $data$green_back$index$dat $log_rat$index$dat $second
-    
+     cat $log_rat$index$dat > $log_rat$indput$dat
+       echo "This is second #$index" >> "overall_summary.txt"
+       echo " "
+       echo "Time Stamp $index"
+     ./cluster $log_rat$indput$dat >> "overall_summary.txt"
+
+        cat "expressed_genes.txt">"expressed_genes_total_"$index".txt" 
+        cat "suppressed_genes.txt">"suppressed_genes_total_"$index".txt" 
+        cat "stationary_genes.txt">"stationary_genes_total_"$index".txt" 
+
+        echo "Number of expressed Genes:" >>"overall_summary.txt"
+        wc -l < "expressed_genes_total_"$index".txt" >>"overall_summary.txt"
+        echo "Number of suppressed Genes:" >>"overall_summary.txt"
+        wc -l < "suppressed_genes_total_"$index".txt" >>"overall_summary.txt"
+        echo "Number of stationary Genes:" >>"overall_summary.txt"
+        wc -l < "stationary_genes_total_"$index".txt" >>"overall_summary.txt"
+
+        bash kinnisone_genequery.sh "$index"
+
     let "index++"
 done
 
 index=0
-while [ $index -le $second ]
-do
-     ./cluster $log_rat$index$dat
-    if [ $index == 0 ]
-    then
-        cat "expressed_genes.txt">"expressed_genes_total.txt" 
-        cat "suppressed_genes.txt">"suppressed_genes_total.txt" 
-        cat "stationary_genes.txt">"stationary_genes_total.txt" 
-    else
-        cat "expressed_genes.txt">>"expressed_genes_total.txt" 
-        cat "suppressed_genes.txt">>"suppressed_genes_total.txt" 
-        cat "stationary_genes.txt">>"stationary_genes_total.txt" 
-    fi
-    let "index++"
-done
-
-index=0
 
 
-bash kinnisone_genequery.sh
