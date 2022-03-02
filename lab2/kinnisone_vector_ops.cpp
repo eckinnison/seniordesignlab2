@@ -33,11 +33,11 @@ void banana::pie::set_arr_sub(vector<float> data, vector<float> data2){
 void banana::pie::set_div_arr(vector<float> data, float val){
     float arr[data.size()];    //make an array to count data points in each bucket
 
-    float starter= data[0]*(1/val);
+    float starter= data[0]/val;
 
     this->div.insert(div.begin(), starter);  //start the vector
     for(int i=1; i<data.size(); i++){
-        arr[i]= data[i]*(1/val);
+        arr[i]= data[i]/val;
         vector<float>::iterator testing2= this->div.insert(div.end(), 1, arr[i]);    //load the bucketvals with the array values
     }
 }

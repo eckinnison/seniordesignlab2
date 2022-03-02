@@ -15,7 +15,7 @@ else
     then
         echo "Surppressed"
     else
-        if grep -Fxa "$userin" s"tationary_genes_total_"$1".txt"
+        if grep -Fxq "$userin" "stationary_genes_total_"$1".txt"
         then
             echo "Stationary"
         else

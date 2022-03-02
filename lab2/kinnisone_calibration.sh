@@ -68,7 +68,7 @@ while [ $index -le $second ]
 do
      ./preprocess $data$red$index$dat $data$red_back$index$dat  $data$green$index$dat  $data$green_back$index$dat $log_rat$index$dat $second
      cat $log_rat$index$dat > $log_rat$indput$dat
-       echo "This is second #$index" >> "overall_summary.txt"
+       echo "This is time point #$index" >> "overall_summary.txt"
        echo " "
        echo "Time Stamp $index"
      ./cluster $log_rat$indput$dat >> "overall_summary.txt"
