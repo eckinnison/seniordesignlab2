@@ -16,18 +16,18 @@ std::ifstream myfile5;
 std::ofstream finalfile;
 
 int main(int argc, char** argv){
-    banana::pie obj;
+    banana::pie obj;            //make all the objects
     tryme::hell calc;
     pizza::toppings bacon;
 
-    std::string redcellfile;
+    std::string redcellfile;            //make all the strings and other input variables
     std::string backgroundredfile;
     std::string greencellfile;
     std::string backgroundgreenfile;
     std::string calidatafile;
     int genenum;
 
-	if(argv[1]!=NULL){
+	if(argv[1]!=NULL){          //get the red cell file or throw an error
         redcellfile =argv[1];
     }
     else{
@@ -35,7 +35,7 @@ int main(int argc, char** argv){
             return 1;
     }  
 
-    if(argv[2]!=NULL){
+    if(argv[2]!=NULL){          //get the red background cell file or throw an error
         backgroundredfile =argv[2];
     }
     else{
@@ -43,7 +43,7 @@ int main(int argc, char** argv){
             return 2;
     } 
 
-    if(argv[3]!=NULL){
+    if(argv[3]!=NULL){          //get the green cell file or throw an error
         greencellfile =argv[3];
     }
     else{
@@ -51,7 +51,7 @@ int main(int argc, char** argv){
             return 3;
     } 
 
-    if(argv[4]!=NULL){
+    if(argv[4]!=NULL){          //get the green background cell file or throw an error
         backgroundgreenfile =argv[4];
     }
     else{
@@ -59,7 +59,7 @@ int main(int argc, char** argv){
             return 4;
     } 
 
-    if(argv[5]!=NULL){
+    if(argv[5]!=NULL){          //get the write to file or throw an error
         calidatafile =argv[5];
     }
     else{
@@ -67,7 +67,7 @@ int main(int argc, char** argv){
             return 5;
     } 
 
-    if(argv[6]!=NULL){
+    if(argv[6]!=NULL){          //get the number of genes
         genenum =atoi(argv[6]);
     }
     else{
@@ -91,36 +91,36 @@ int main(int argc, char** argv){
         std::vector<float> data4(start4, end4); 
 
 
-        if((genenum<=data.size())||(genenum<=data2.size())||(genenum<=data3.size())||(genenum<=data4.size())){
-            obj.set_arr_sub(data, data2);
+        if((genenum<=data.size())||(genenum<=data2.size())||(genenum<=data3.size())||(genenum<=data4.size())){  //only do it while we have data
+            obj.set_arr_sub(data, data2);                   //subtract the redbackground from the red
             std::vector<float> subred = obj.get_arr_sub();
-            obj.set_arr_sub(data3, data4);
+            obj.set_arr_sub(data3, data4);                  //subtract the greenbackground from the green
             std::vector<float> subgreen = obj.get_arr_sub();
 
-            calc.set_mean(subred);
+            calc.set_mean(subred);                      //calc the new red mean
             float meanred= calc.get_mean();
 
-            calc.set_mean(subgreen);
+            calc.set_mean(subgreen);                      //calc the new green mean
             float meangreen= calc.get_mean();
 
-            obj.set_div_arr(subred, meanred);
+            obj.set_div_arr(subred, meanred);            //calc the division for red
             std::vector<float> normred = obj.get_div_arr();
-            obj.set_div_arr(subgreen, meangreen);
+            obj.set_div_arr(subgreen, meangreen);       //calc the division for green
             std::vector<float> normgreen = obj.get_div_arr();
             
 
-            bacon.set_log_ratio(normred, normgreen);
+            bacon.set_log_ratio(normred, normgreen);        //calc the log ratio
             std::vector<float> intense_ratio =bacon.get_log_ratio();
 
-            finalfile.open(calidatafile);
+            finalfile.open(calidatafile);       //open the write to file
 
-            for (int j=0; j<intense_ratio.size();j++){
+            for (int j=0; j<intense_ratio.size();j++){      //write all the values to the file
                 finalfile << intense_ratio[j]<<"\n";
             }
             finalfile.close();
 
         }
-        else{
+        else{       //throw the error
             std::cout<<"Error: Data file too small for number of genes requested\n";
             return 12;
         }
@@ -128,7 +128,7 @@ int main(int argc, char** argv){
 
 
     }
-    else{
+    else{           //figure out which file was the first problem
         if(!(myfile.is_open())){
             std::cout<<"Error: Red cell file didnt open\n";
             return 7;

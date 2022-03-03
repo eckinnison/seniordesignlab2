@@ -22,7 +22,7 @@ namespace tryme{        //this is my namespace, I was very frustrated when makin
             float get_max();
             float get_min();
             float get_mean();
-            float get_std();
+            float get_std();                                
             vector<float> get_histogram_buckets();
             vector<float> get_histogram_bucketsvals();
 

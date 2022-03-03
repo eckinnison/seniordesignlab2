@@ -7,18 +7,20 @@ echo "Which gene do you want to check?"
 
 read userin
 
-if grep -Fxq "$userin" "expressed_genes_total_"$1".txt"
+#read in everything 
+
+if grep -Fxq "$userin" "expressed_genes_total_"$1".txt" #check for the user input
 then
     echo "Expressed"
 else
-    if grep -Fxq "$userin" "suppressed_genes_total_"$1".txt"
+    if grep -Fxq "$userin" "suppressed_genes_total_"$1".txt"  #check for the user input
     then
         echo "Surppressed"
     else
-        if grep -Fxq "$userin" "stationary_genes_total_"$1".txt"
+        if grep -Fxq "$userin" "stationary_genes_total_"$1".txt"  #check for the user input
         then
             echo "Stationary"
-        else
+        else                        #if it failed
             echo "Not a gene"
         fi
     fi
