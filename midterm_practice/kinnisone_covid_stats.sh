@@ -25,8 +25,8 @@ arr_csv=()
 #echo "Record at index-${index} : $arr_csv[@]"
 
 num_rows=0
-num_rows1=1
-
+num_rows_start=0
+num_rows_end=0
 #https://www.xmodulo.com/read-column-data-text-file-bash.html#:~:text=To%20read%20column%20data%20from%20a%20file%20in%20bash%2C%20you,%2Dof%2Dfile%20is%20reached.
 while IFS=, read -ra fields; do
     location[num_rows]=${fields[2]}
@@ -38,9 +38,30 @@ while IFS=, read -ra fields; do
     new_deaths[num_rows]=${fields[8]}
     new_deaths_smoothed[num_rows]=${fields[9]}
     total_cases_per_million[num_rows]=${fields[10]} 
-    new_cases_per_million[num_rows]=${fields[11]}
+    new_cases_per_million[num_rows]=${fields[11]} 
+
+    if [[ ${location[num_rows]} == *"$@"* ]]
+    then
+        if [ ! $num_rows_start = 0 ]
+        then
+            true
+        else
+           num_rows_start=$num_rows 
+           echo "blah $num_rows_start"
+        fi    
+    fi
 
 
+    if [ $num_rows_start -gt 0 ]
+    then
+        if [[ ${location[num_rows]} -ne $@ ]]
+        then
+            num_rows_end=$(echo "$num_rows-1" | bc -l )
+
+                       echo "$num_rows_end"
+
+        fi
+    fi
     ((num_rows=num_rows+1))
 done < "owid-covid-data.csv"
 
@@ -54,48 +75,20 @@ echo "the total number of arguments is:"
 echo $#
 
 index=0
-
-month=0
 sum=0
-while [ $index -le $num_rows ]
+echo "pre $sum"
+
+
+sum=0.0
+month=0
+for (( index=$num_rows_start;index<$num_rows_end;index++))
 do
-    if [ $@ == "${location[$index]}" ] 
-    then
-        if [[ "2020-02" == *"${data[$index]}"* ]]
-        then
-            month=0
-            echo "pre ${sum[$month]}"
-            echo "pre2 ${new_cases_per_million[$index]}"
+        echo "here $sum"
 
-            echo "${sum[$month]} + ${new_cases_per_million[$index]}" | bc -l 
-            echo  "${sum[$month]}"
-            #(("$sum[$month]"=("${sum[$month]}" + "${new_cases_per_million[$index]}" | bc -l))
-            echo "here"
-
-        # elif [[ "2020-03" == *"${data[$index]}"* ]]
-        # then 
-        #     month=1
-        #     ((sum[$month]=sum[$month]+${new_cases_per_million[$index]}))
-        #     echo "here1"
-
-        # elif [[ "2020-04" == *"${data[$index]}"* ]]
-        # then 
-        #     month=2
-        #     ((sum[$month]=sum[$month]+${new_cases_per_million[$index]})) 
-        #     echo "here2"
-
-        # elif [[ "2020-05" == *"${data[$index]}"* ]]
-        # then 
-        #     month=3
-        #     ((sum[$month]=sum[$month]+${new_cases_per_million[$index]})) 
-        #     echo "here3"
-        else  
-            true
-        fi
-    else
-        true
-    fi
-
-    ((index=index+1))
+    
+        echo "$sum + ${new_cases_per_million[$index]}"
+        echo "${new_cases_per_million[$index]}"
+        sum=$(echo "$sum + ${new_cases_per_million[$index]}" | bc -l )
+    
 
 done
