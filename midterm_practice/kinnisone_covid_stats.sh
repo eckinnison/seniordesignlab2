@@ -107,6 +107,7 @@ do
         else
             avg[month]=$(echo "$sum/$data" | bc -l )
             # echo "avg ${avg[$month]}"
+            start_date[month]=${date[$index]}
             ((month=month+1))
             sum=0
             data=1
@@ -122,8 +123,8 @@ echo "avg 0: ${avg[$month]}"
 maxmonth1=$month
 
 month2=0
-data=1
-
+data=0
+curr_day2=0
 for (( index2=$num_rows_start2;index2<$num_rows_end2;index2++))
 do
     if [ ${new_cases_per_million[$index2]} ]
@@ -137,6 +138,7 @@ do
         else
             avg2[month2]=$(echo "$sum2/$data2" | bc -l )
             #  echo "avg ${avg[$month]}"
+            start_date2[month2]=${date[$index2]}
             ((month2=month2+1))
             sum2=0
             data2=1
@@ -147,5 +149,15 @@ do
 done
 month2=$(echo "$month2-1" | bc -l )
 echo "done country 2"
-echo "avg 0: ${avg[$month2]}"
+echo "avg 0: ${avg2[$month2]}"
 maxmonth2=$month2
+
+
+for(( i=0;i<$maxmonth2;i++))
+do
+    echo "$1 ${start_date[$i]}">>"$1_$2_covid_comparision.txt"
+    echo "Average: ${avg[$i]}">>"$1_$2_covid_comparision.txt"
+    echo "$2 ${start_date2[$i]}">>"$1_$2_covid_comparision.txt"
+    echo "Average: ${avg2[$i]}">>"$1_$2_covid_comparision.txt"
+
+done
