@@ -96,21 +96,24 @@ curr_day2=0
 
 for (( index=$num_rows_start;index<$num_rows_end;index++))
 do
-    if [ $(echo ${date[$index]} | sed 's/........//') -gt $curr_day ]
+    if [ ${new_cases_per_million[$index2]} ]
     then
-        sum=$(echo "$sum + ${new_cases_per_million[$index]}" | bc -l )
-        curr_day=$(echo ${date[$index]} | sed 's/........//')
-        # echo "day: $curr_day"
-        ((data=data+1))
-    else
-        avg[month]=$(echo "$sum/$data" | bc -l )
-        # echo "avg ${avg[$month]}"
-        ((month=month+1))
-        sum=0
-        data=1
-        sum=$(echo "$sum + ${new_cases_per_million[$index]}" | bc -l )
-        curr_day=$(echo ${date[$index]} | sed 's/........//')
-    fi
+        if [ $(echo ${date[$index]} | sed 's/........//') -gt $curr_day ]
+        then
+            sum=$(echo "$sum + ${new_cases_per_million[$index]}" | bc -l )
+            curr_day=$(echo ${date[$index]} | sed 's/........//')
+            # echo "day: $curr_day"
+            ((data=data+1))
+        else
+            avg[month]=$(echo "$sum/$data" | bc -l )
+            # echo "avg ${avg[$month]}"
+            ((month=month+1))
+            sum=0
+            data=1
+            sum=$(echo "$sum + ${new_cases_per_million[$index]}" | bc -l )
+            curr_day=$(echo ${date[$index]} | sed 's/........//')
+        fi
+    fi    
 done
 
 month=$(echo "$month-1" | bc -l )
@@ -123,22 +126,26 @@ data=1
 
 for (( index2=$num_rows_start2;index2<$num_rows_end2;index2++))
 do
-    if [ $(echo ${date[$index2]} | sed 's/........//') -gt $curr_day2 ]
+    if [ ${new_cases_per_million[$index2]} ]
     then
-        sum2=$(echo "$sum2 + ${new_cases_per_million[$index2]}" | bc -l )
-        curr_day2=$(echo ${date[$index2]} | sed 's/........//')
-        # echo "day: $curr_day"
-        ((data2=data2+1))
-    else
-        avg2[month2]=$(echo "$sum2/$data2" | bc -l )
-        # echo "avg ${avg[$month]}"
-        ((month2=month2+1))
-        sum2=0
-        data2=1
-        sum2=$(echo "$sum2 + ${new_cases_per_million[$index2]}" | bc -l )
-        curr_day2=$(echo ${date[$index2]} | sed 's/........//')
-    fi
+        if [ $(echo ${date[$index2]} | sed 's/........//') -gt $curr_day2 ]
+        then
+            sum2=$(echo "$sum2 + ${new_cases_per_million[$index2]}" | bc -l )
+            curr_day2=$(echo ${date[$index2]} | sed 's/........//')
+            #  echo "day: $curr_day2"
+            ((data2=data2+1))
+        else
+            avg2[month2]=$(echo "$sum2/$data2" | bc -l )
+            #  echo "avg ${avg[$month]}"
+            ((month2=month2+1))
+            sum2=0
+            data2=1
+            sum2=$(echo "$sum2 + ${new_cases_per_million[$index2]}" | bc -l )
+            curr_day2=$(echo ${date[$index2]} | sed 's/........//')
+        fi
+    fi    
 done
-
-echo "${avg[1]}"
-echo "${avg2[1]}"
+month2=$(echo "$month2-1" | bc -l )
+echo "done country 2"
+echo "avg 0: ${avg[$month2]}"
+maxmonth2=$month2
