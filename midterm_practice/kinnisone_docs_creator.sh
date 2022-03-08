@@ -53,9 +53,13 @@ echo "index E $header_index_end"
 
 for(( i=$header_index_start;i<=$header_index_end;i++))
 do
-    echo ${data[$i]} | sed 's/'/'//' | sed 's/*//'">>"$1_documentation.txt"
-    echo "${data[$i]}"
+#https://www.google.com/search?q=how+to+remove+backslash+using+sed+bash&rlz=1C1ONGR_enUS986US986&sxsrf=APq-WBt-RrW8kwk2RLA6hyNkihuKND5s1w%3A1646720755691&ei=8_YmYvrUKfWoptQPxeKwmAY&ved=0ahUKEwi6mr_t8LX2AhV1lIkEHUUxDGMQ4dUDCA4&uact=5&oq=how+to+remove+backslash+using+sed+bash&gs_lcp=Cgxnd3Mtd2l6LXNlcnAQAzoHCCMQsAMQJzoHCAAQRxCwAzoECCMQJzoFCAAQogQ6BAghEApKBAhBGABKBAhGGABQsAVYrSJg-yZoAXABeACAAZMBiAHHB5IBBDExLjGYAQCgAQHIAQnAAQE&sclient=gws-wiz-serp
+#https://linuxhint.com/remove_characters_string_bash/
+    echo "${data[$i]}" | sed 's/*//' | sed 's/[//]//'>>"$1_documentation.txt"
+    echo "${data[$i]}" | sed 's/*//' | sed 's/[//]//'
+
 done
+echo "=============================================">>"$1_documentation.txt"
 
 
 flag=0
@@ -105,11 +109,16 @@ done
 
 for(( i=0;i<=$place;i++))
 do
-        echo "">>"$1_documentation.txt"
+    if [ $i = 0 ]
+    then 
+        echo " ">>"$1_documentation.txt"
+    else
+        echo "-----------------------------">>"$1_documentation.txt"
+    fi
     for(( j=${counter[$i]};j<=${counter[$i+1]};j++))
     do
         
-        echo "${data[$j]}">>"$1_documentation.txt"
+        echo "${data[$j]}"| sed 's/*//' | sed 's/[//]//' | sed 's/[//]//' >>"$1_documentation.txt"
         echo "${data[$j]}"
 
 
