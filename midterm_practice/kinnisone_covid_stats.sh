@@ -58,7 +58,7 @@ while IFS=, read -ra fields; do
         then
             if [ $num_rows_end2 = 0 ]
             then
-                num_rows_end2=$(echo "$num_rows2-1" | bc -l )
+                num_rows_end2=$(echo "$num_rows-1" | bc -l )
                 # echo "hehehe $num_rows_end"
             fi
         fi       
@@ -71,23 +71,22 @@ then
     num_rows_end=$num_rows
 fi
 
+if [ $num_rows_end2 = 0 ]
+then
+    num_rows_end2=$num_rows
+fi
 
 #https://linuxhint.com/check-the-number-of-arguments-in-bash/#:~:text=The%20%24%23%20special%20variable%20always,to%20any%20specific%20Bash%20script.
 echo "the passed arguments are:"
 echo $@
 echo "the total number of arguments is:"
 echo $#
-
-
 index=0
-sum=0
-
-
 sum=0.0
-
-
 data=0
-
+index2=0
+sum2=0.0
+data2=0
 
 echo "echo ${date[2]}"
 past=0
@@ -107,28 +106,39 @@ do
         avg[month]=$(echo "$sum/$data" | bc -l )
         # echo "avg ${avg[$month]}"
         ((month=month+1))
-        data=0
+        sum=0
+        data=1
         sum=$(echo "$sum + ${new_cases_per_million[$index]}" | bc -l )
         curr_day=$(echo ${date[$index]} | sed 's/........//')
     fi
 done
 
-for (( index=$num_rows_start2;index<$num_rows_end2;index++))
+month=$(echo "$month-1" | bc -l )
+echo "done country 1"
+echo "avg 0: ${avg[$month]}"
+maxmonth1=$month
+
+month2=0
+data=1
+
+for (( index2=$num_rows_start2;index2<$num_rows_end2;index2++))
 do
-    if [ $(echo ${date[$index]} | sed 's/........//') -gt $curr_day2 ]
+    if [ $(echo ${date[$index2]} | sed 's/........//') -gt $curr_day2 ]
     then
-        sum=$(echo "$sum + ${new_cases_per_million[$index]}" | bc -l )
-        curr_day2=$(echo ${date[$index]} | sed 's/........//')
+        sum2=$(echo "$sum2 + ${new_cases_per_million[$index2]}" | bc -l )
+        curr_day2=$(echo ${date[$index2]} | sed 's/........//')
         # echo "day: $curr_day"
-        ((data=data+1))
+        ((data2=data2+1))
     else
-        avg[month]=$(echo "$sum/$data" | bc -l )
+        avg2[month2]=$(echo "$sum2/$data2" | bc -l )
         # echo "avg ${avg[$month]}"
-        ((month=month+1))
-        data=0
-        sum=$(echo "$sum + ${new_cases_per_million[$index]}" | bc -l )
-        curr_day=$(echo ${date[$index]} | sed 's/........//')
+        ((month2=month2+1))
+        sum2=0
+        data2=1
+        sum2=$(echo "$sum2 + ${new_cases_per_million[$index2]}" | bc -l )
+        curr_day2=$(echo ${date[$index2]} | sed 's/........//')
     fi
 done
 
-echo ${date[$index]}
+echo "${avg[1]}"
+echo "${avg2[1]}"
