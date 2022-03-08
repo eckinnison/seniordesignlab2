@@ -10,6 +10,17 @@ then
     wget https://raw.githubusercontent.com/owid/covid-19-data/master/public/data/owid-covid-data.csv -c covid_data.csv
 fi
 
+if [ ! $1 ]
+then
+    echo "No first input"
+    exit 1
+fi
+
+if [ ! $2 ]
+then
+    echo "No second input"
+    exit 1
+fi
 arr_csv=() 
 
 num_rows=0
@@ -88,7 +99,6 @@ index2=0
 sum2=0.0
 data2=0
 
-echo "echo ${date[2]}"
 past=0
 curr_day=0
 past2=0
@@ -118,8 +128,6 @@ do
 done
 
 month=$(echo "$month-1" | bc -l )
-echo "done country 1"
-echo "avg 0: ${avg[$month]}"
 maxmonth1=$month
 
 month2=0
@@ -148,8 +156,6 @@ do
     fi    
 done
 month2=$(echo "$month2-1" | bc -l )
-echo "done country 2"
-echo "avg 0: ${avg2[$month2]}"
 maxmonth2=$month2
 
 
