@@ -3,11 +3,8 @@
 #Assignment: Lab 2
 #Comments: this is my attempt at a make file
 
-
-CC = g++
-
 vector_ops.o: kinnisone_vector_ops.hpp kinnisone_vector_ops.cpp
-			  g++ -c vector_ops $^
+				g++ -c vector_ops $^
 
 lab1_stats.o: kinnisone_stats.hpp kinnisone_stats.cpp kinnisone_stats_test.cpp 
 			  g++ -c cppstats $^
