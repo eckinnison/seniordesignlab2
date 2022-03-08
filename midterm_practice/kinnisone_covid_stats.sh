@@ -48,24 +48,26 @@ while IFS=, read -ra fields; do
         else
            num_rows_start=$num_rows 
            echo "blah $num_rows_start"
-        fi    
-    fi
-
-
-    if [ $num_rows_start -gt 0 ]
-    then
-        if [[ ${location[num_rows]} -ne $@ ]]
+        fi 
+    else
+        if [ $num_rows_start -gt 0 ]
         then
-            num_rows_end=$(echo "$num_rows-1" | bc -l )
-
-                       echo "$num_rows_end"
-
-        fi
+            if [ $num_rows_end = 0 ]
+            then
+                num_rows_end=$(echo "$num_rows-1" | bc -l )
+                echo "hehehe $num_rows_end"
+            fi
+        fi       
     fi
+
+
     ((num_rows=num_rows+1))
 done < "owid-covid-data.csv"
 
-
+if [ $num_rows_end = 0 ]
+then
+    num_rows_end=$num_rows
+fi
 
 
 #https://linuxhint.com/check-the-number-of-arguments-in-bash/#:~:text=The%20%24%23%20special%20variable%20always,to%20any%20specific%20Bash%20script.
