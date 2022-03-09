@@ -4,7 +4,7 @@ brennanb_stats.o: brennanb_stats.cpp brennanb_stats.hpp
  
 brennanb_corr.o: brennanb_corr.cpp brennanb_stats.o
 	 	 	 g++ -c $^
-	 	 	 g++ -o brennanb_corr $^
+	 	 	 g++ -o Simple $^
 
 all: brennanb_corr.o brennanb_stats.o 
 

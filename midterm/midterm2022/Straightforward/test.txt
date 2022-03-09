@@ -1,4 +1,3 @@
-dandelion
 dandelion.cpp
 dandelion.o
 makefile

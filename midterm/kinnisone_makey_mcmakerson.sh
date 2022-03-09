@@ -20,6 +20,12 @@ else
     exit 1
 fi
 
+
+# if [ -z "$(ls -A $1)" ]
+# then
+#     exit 1
+# fi
+
 #check for a makefile
 if [ -f "makefile" ]
 then
@@ -27,6 +33,8 @@ then
 else
     touch "makefile"
 fi
+
+
 #get the output to a file
 #echo "">"test.txt"
 echo "$(ls)">"test.txt"
@@ -51,15 +59,29 @@ while read -r fields; do
     else
         true
     fi
-    #data[num_rows]=$fields;
+
 done < "test.txt"
 
 
+flag=0
+if [ $num_rows_cpp ]
+then
+    echo "??"
+else
+    flag=1
+fi
 
+if [ $num_rows_hpp ]
+then
+    echo "??????"
+else
+    if [ "$flag" = 1 ] 
+    then
+        echo "theres no files"
+        exit 1
+    fi
 
-
-
-
+fi
 #get all the contents of the data into a variable for each file (cpp)
 #num_rows_cpp is also the number of ofiles
 numfile_rows_cpp=0
@@ -272,4 +294,10 @@ echo "">>"makefile"
 make clean
 make all
 
-./$exe
+if [ -f "$exe" ]
+then    
+    ./$exe
+else
+    echo "No exe file!"
+    exit 1
+fi
