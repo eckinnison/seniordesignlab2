@@ -230,9 +230,15 @@ done
     echo -n "${o_names[$main_file]}.o: ${cpp[$main_file]}">>"makefile"
     for (( index=0;index<$num_rows_cpp;index++))
     do
-        echo -n " ${o_names[$index]}.o">>"makefile"
+        if [ $main_file = $index ]
+        then
+            true
+        else
+            echo -n " ${o_names[$index]}.o">>"makefile"
+        fi
     done
     echo "">>"makefile"
+    echo -e "\t \t \t g++ -c $^">>"makefile"
     echo -e "\t \t \t g++ -o ${o_names[$main_file]} $^">>"makefile"
     echo "">>"makefile"
 
