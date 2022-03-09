@@ -1,0 +1,17 @@
+dandelion
+dandelion.cpp
+dandelion.o
+makefile
+test.txt
+toss_a_coin.cpp
+toss_a_coin.hpp
+toss_a_coin.hpp.gch
+toss_a_coin.o
+valley_of_plenty.cpp
+valley_of_plenty.hpp
+valley_of_plenty.hpp.gch
+valley_of_plenty.o
+wolf.cpp
+wolf.hpp
+wolf.hpp.gch
+wolf.o
