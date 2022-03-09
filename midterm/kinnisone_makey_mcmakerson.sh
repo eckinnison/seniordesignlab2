@@ -272,4 +272,4 @@ echo "">>"makefile"
 make clean
 make all
 
-./${o_names[$main_file]}
+./$exe
