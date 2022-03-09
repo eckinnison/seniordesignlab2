@@ -1,14 +1,14 @@
  
-toss_a_coin.o: toss_a_coin.cpp 
-	 	 	 g++ -c toss_a_coin $^
+toss_a_coin.o: toss_a_coin.cpp toss_a_coin.hpp valley_of_plenty.hpp   
+	 	 	 g++ -c $^
  
-valley_of_plenty.o: valley_of_plenty.cpp 
-	 	 	 g++ -c valley_of_plenty $^
+valley_of_plenty.o: valley_of_plenty.cpp valley_of_plenty.hpp   
+	 	 	 g++ -c $^
  
-wolf.o: wolf.cpp valley_of_plenty.hpp wolf.hpp valley_of_plenty.hpp wolf.hpp toss_a_coin.hpp valley_of_plenty.hpp wolf.hpp 
-	 	 	 g++ -c wolf $^
+wolf.o: wolf.cpp wolf.hpp   
+	 	 	 g++ -c $^
  
-dandelion.o: dandelion.cpp valley_of_plenty.hpp
+dandelion.o: dandelion.cpp dandelion.o toss_a_coin.o valley_of_plenty.o wolf.o
 	 	 	 g++ -o dandelion $^
 
 all: toss_a_coin.o valley_of_plenty.o wolf.o dandelion.o 

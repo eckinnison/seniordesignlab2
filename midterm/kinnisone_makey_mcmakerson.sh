@@ -62,23 +62,24 @@ done < "test.txt"
 numfile_rows_cpp=0
 main_file=0
 file_index_cpp[0]=0
-includes_index=0
-includes_perfile[0]=0
 for (( index=0;index<$num_rows_cpp;index++))
 do
+    include_file[index]=" "
     while read -r fields; do
         cppfile[file_rows_cpp]=$fields;
         if [[ "${cppfile[$file_rows_cpp]}" == *"#include"* ]]
         then
             if [[ "${cppfile[$file_rows_cpp]}" == *".hpp"* ]]
             then
-                include_file[includes_index]=$(echo "${cppfile[$file_rows_cpp]}" | sed 's/#include //g'  | sed 's/["]//g')
-                ((includes_index=includes_index+1))
-
+                include_file[index]+=$(echo "${cppfile[$file_rows_cpp]}" | sed 's/#include //g'  | sed 's/["]//g')
+                include_file[index]+=" "
+                #echo "1 $index ${include_file[$index]}"
             elif [[ "${cppfile[$file_rows_cpp]}" == *".cpp"* ]]
             then
-                include_file[includes_index]=$(echo "${cppfile[$file_rows_cpp]}" | sed 's/#include //g'  | sed 's/["]//g')
-                ((includes_index=includes_index+1))
+                include_file[index]+=$(echo "${cppfile[$file_rows_cpp]}" | sed 's/#include //g'  | sed 's/["]//g')
+                include_file[index]+=" " 
+                #echo "2 $index ${include_file[$index]}"
+           
             else    
                 true
             fi   
@@ -90,44 +91,62 @@ do
         ((file_rows_cpp=file_rows_cpp+1))
     done < "${cpp[$index]}"
     ((index=index+1))
-    ((includes_index=includes_index-1))
-    includes_perfile[$index]=$includes_index
     file_index_cpp[$index]=$numfile_rows_hpp
-    ((includes_index=includes_index+1))
     ((index=index-1))
     o_names[$index]=${cpp[$index]::-4}
 done
 
-#get all the contents of the data into a variable for each file (hpp) and determine #includes
-numfile_rows_cpp=0
+#check for the contents of the hpps to have other hpps
+numfile_rows_hpp=0
 file_index_hpp[0]=0
 for (( index=0;index<$num_rows_hpp;index++))
 do
-    includes_index=${includes_perfile[$index]}
+    include_file_hpp[index]=" "
+
     while read -r fields; do
         hppfile[numfile_rows_hpp]=$fields;
         if [[ "${hppfile[$numfile_rows_hpp]}" == *"#include"* ]]
         then
             if [[ "${hppfile[$numfile_rows_hpp]}" == *".hpp"* ]]
             then
-                include_file[includes_index]=$(echo "${hppfile[$file_rows_hpp]}" | sed 's/#include //g'  | sed 's/["]//g')
-                ((includes_index=includes_index+1))
+                for (( indexs=0;indexs<$num_rows_cpp;indexs++))
+                do
+                    echo "1 $indexs ${include_file[$indexs]}"
+                    echo "2 $indexs ${hpp[$index]}"
+
+                    if [[ "${include_file[$indexs]}" = *"${hpp[$index]}"* ]]
+                    then
+                        echo "${hppfile[$numfile_rows_hpp]}"
+                        include_file[indexs]+=$(echo "${hppfile[$numfile_rows_hpp]}" | sed 's/#include //g'  | sed 's/["]//g')
+                        include_file[indexs]+=" " 
+                        echo "0000000000000"
+                    fi
+                done
+                
+                
+                #echo "3 $index ${include_file_hpp[$index]}"
+           
             elif [[ "${hppfile[$numfile_rows_hpp]}" == *".cpp"* ]]
             then
-                include_file[includes_index]=$(echo "${hppfile[$file_rows_hpp]}" | sed 's/#include //g'  | sed 's/["]//g')
-                ((includes_index=includes_index+1))
+               # echo "4 $index ${include_file_hpp[$index]}"
+                for (( indexs=0;indexs<$num_rows_cpp;indexs++))
+                do
+                    echo "3 $indexs ${include_file[$indexs]}"
+                    echo "4 $indexs ${hpp[$index]}"
+                    if [[ "${include_file[$indexs]}" = *"${hpp[$index]}"* ]]
+                    then
+                        include_file[indexs]+=$(echo "${hppfile[$file_rows_hpp]}" | sed 's/#include //g'  | sed 's/["]//g')
+                        include_file[indexs]+=" " 
+                    fi
+                done
             else    
                 true
             fi   
         fi
-        ((numfile_rows_cpp=numfile_rows_cpp+1))
+        ((numfile_rows_hpp=numfile_rows_hpp+1))
     done < "${hpp[$index]}"
     ((index=index+1))
-    ((includes_index=includes_index-1))
-    includes_perfile[$index]=$includes_index
     file_index_hpp[$index]=$numfile_rows_hpp
-    ((includes_index=includes_index+1))
-
     ((index=index-1))
 done
 
@@ -140,19 +159,47 @@ done
 
 
 
+#make the final string
+# for (( index=0;index<$num_rows_cpp;index++))
+# do
+#     final_includes[index]+=${include_file[$index]}
+#     final_includes[index]+=" "
+#     echo "5 ${final_includes[$index]}"
+#     for (( indexhpp=0;indexhpp<$num_rows_hpp;indexhpp++))
+#     do
+#         if [[ "${include_file[$index]}" = *"${hpp[$indexhpp]}"* ]]
+#         then
+#             final_includes[index]+=${include_file_hpp[$indexhpp]}
+#             echo "Index: $index Indexhpp: $indexhpp file#INC ${final_includes[$index]}"
+#         fi
+    
+
+#     done
+# done
+
+for (( index=0;index<$num_rows_cpp;index++))
+do
+    final_includes[index]+=${include_file[$index]}
+    final_includes[index]+=" "
+    echo "6 $index ${final_includes[$index]}"
+    for (( indexhpp=0;indexhpp<$num_rows_hpp;indexhpp++))
+    do
+        if [[ "${include_file_hpp[$index]}" = *"${hpp[$indexhpp]}"* ]]
+        then
+            final_includes[index]+=${include_file_hpp[$indexhpp]}
+            echo "Index: $index Indexhpp: $indexhpp file#INC ${final_includes[$index]}"
+        fi
+    
+
+    done
+done
+
+
 ######################
 #creating make file
 #woot!!!woot!!!
 ######################
-echo "$includes_index"
-echo "$num_rows_cpp"
-echo "${include_file[0]}"
-echo "${include_file[1]}"
-echo "${include_file[2]}"
-echo "${include_file[3]}"
-echo "${include_file[4]}"
-echo "${include_file[5]}"
-echo " "
+
 
 includes_index=0
 for (( index=0;index<$num_rows_cpp;index++))
@@ -163,25 +210,27 @@ do
     else
         ((index2=index+1))
         echo -n "${o_names[$index]}.o: ${cpp[$index]}">>"makefile"
-        for (( inc=${includes_perfile[$index]};inc<=${includes_perfile[$index2]}; inc++))
-        do
-            echo -n " ${include_file[$inc]}">>"makefile"
-        done
+        # for (( inc=${includes_perfile[$index]};inc<=${includes_perfile[$index2]}; inc++))
+        # do
+        #     echo -n " ${include_file[$inc]}">>"makefile"
+        # done
+        echo -n "${final_includes[$index]}">>"makefile"
         ((inc=inc+1))
 
         echo " ">>"makefile"
         
-            echo -e "\t \t \t g++ -c ${o_names[$index]} $^">>"makefile"
+        echo -e "\t \t \t g++ -c $^">>"makefile"
     fi
     echo " ">>"makefile"
 
 done
 
+#do the main at the bottom
+
     echo -n "${o_names[$main_file]}.o: ${cpp[$main_file]}">>"makefile"
-    index2=main_file+1
-    for (( inc=${includes_perfile[$main_file]};inc<=${includes_perfile[$index2]}; inc++))
+    for (( index=0;index<$num_rows_cpp;index++))
     do
-        echo -n " ${include_file[$inc]}">>"makefile"
+        echo -n " ${o_names[$index]}.o">>"makefile"
     done
     echo "">>"makefile"
     echo -e "\t \t \t g++ -o ${o_names[$main_file]} $^">>"makefile"
@@ -201,8 +250,7 @@ do
 
 done
 
-    echo -n "${o_names[$main_file]}.o ">>"makefile"
-
+echo -n "${o_names[$main_file]}.o ">>"makefile"
 echo "">>"makefile"
 echo "">>"makefile"
 
@@ -211,9 +259,6 @@ echo "">>"makefile"
     echo -e "\t rm -f *.o">>"makefile"
     echo -e "\t rm -f *.gch">>"makefile"
     echo -e "\t rm -f all">>"makefile"
-
-
-
 
 make clean
 make all

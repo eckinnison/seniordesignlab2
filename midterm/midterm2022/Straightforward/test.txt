@@ -1,6 +1,4 @@
 dandelion.cpp
-includeshpp.txt
-includes.txt
 makefile
 test.txt
 toss_a_coin.cpp
