@@ -13,6 +13,8 @@ fi
 if [ $1 ]
 then
     cd "$1"
+    exe=$(echo "$1" | sed 's/midterm2022//g'  | sed 's/[/]//g')
+    echo "exe $exe"
 else
     echo "no filepath"
     exit 1
@@ -92,6 +94,7 @@ do
     done < "${cpp[$index]}"
     o_names[$index]=${cpp[$index]::-4}
 done
+
 
 #check for the contents of the hpps to have other hpps
 numfile_rows_hpp=0
@@ -192,11 +195,12 @@ done
 
 
 includes_index=0
+mx=0
 for (( index=0;index<$num_rows_cpp;index++))
 do
-    if [ $main_file = $index ]
+    if [ "${main_file[$mx]}" = "$index" ]
     then
-        true
+        ((mx=mx+1))
     else
         ((index2=index+1))
         echo -n "${o_names[$index]}.o: ${cpp[$index]}">>"makefile"
@@ -219,21 +223,24 @@ done
 mx=0
 for (( i=0;i<$num_rows_cpp;i++))
 do
-    if [ ${main_file[$mx]} = $i ]
+    if [ "${main_file[$mx]}" = "$i" ]
     then
         echo -n "${o_names[${main_file[$mx]} ]}.o: ${cpp[${main_file[$mx]} ]}">>"makefile"
+        mx2=$mx
+        mx=0
         for (( index=0;index<$num_rows_cpp;index++))
         do
-            if [ ${main_file[$mx]} = $index ]
+            if [ "${main_file[$mx]}" = "$index" ]
             then
-                true
+                ((mx=mx+1))
             else
                 echo -n " ${o_names[$index]}.o">>"makefile"
             fi
         done
+        mx=$mx2
         echo "">>"makefile"
         echo -e "\t \t \t g++ -c $^">>"makefile"
-        echo -e "\t \t \t g++ -o ${o_names[${main_file[$mx]} ]} $^">>"makefile"
+        echo -e "\t \t \t g++ -o $exe $^">>"makefile"
         echo "">>"makefile"
         ((mx=mx+1))
     fi
