@@ -1,6 +1,11 @@
 brennanb_corr.cpp
 brennanb_corr.hpp
+brennanb_corr.hpp.gch
+brennanb_corr.o
+brennanb_stats
 brennanb_stats.cpp
 brennanb_stats.hpp
+brennanb_stats.hpp.gch
+brennanb_stats.o
 makefile
 test.txt
