@@ -10,6 +10,5 @@ thehob.cpp
 thehob.hpp
 thehob.hpp.gch
 thehob.o
-tthti
 tthti.cpp
 tthti.o
