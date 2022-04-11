@@ -1,3 +1,4 @@
 kinnisone_makey_mcmakerson.sh
 makefile
 midterm2022
+test.txt

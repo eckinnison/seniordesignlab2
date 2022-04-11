@@ -7,4 +7,5 @@ brennanb_stats.hpp
 brennanb_stats.hpp.gch
 brennanb_stats.o
 makefile
+Simple
 test.txt
