@@ -17,6 +17,8 @@ library_i_think.so:
 
 airspeed: /home/kinnise/Lab0_C_code/miniproject1/kinnisone_miniproject1.cpp 
 	$(CC) $(CFLAGS) -I$(INCDIR) -o $@ $< -Wl,-rpath=$(LIBDIR) -L$(LIBDIR) $(LDFLAGS)
+	chmod +x airspeed		
+	./airspeed swallowspeed.dat
 
 #	$(CC) $(CFLAGS) $(INCDIR) -o $@ $^ -Wl, -rpath=$(LIBDIR) $(LDFLAGS)
 
