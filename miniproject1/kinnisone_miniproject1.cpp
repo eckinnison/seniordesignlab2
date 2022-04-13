@@ -5,7 +5,11 @@ Assignment: miniproject 1
 Comments: this is to calculate statistics of the airspeed velocity of swallows
 */
 #include "/home/kinnise/Lab0_C_code/Lab1/kinnisone_stats.cpp"
-#include <math.h>
+#include <fstream>
+#include <iostream>
+#include <sstream>
+#include <iterator>
+#include <vector>
 std::ifstream myfile;
 
 int main(int argc, char** argv){
