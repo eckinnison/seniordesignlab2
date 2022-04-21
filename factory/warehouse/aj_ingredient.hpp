@@ -4,7 +4,7 @@
 class Ingredient{
     public:
         void Ingredient(std::string name, int quantity, std::string path);
-        void Ingredient(std::string name, std::string path);
+       // void Ingredient(std::string name, std::string path);
 
         virtual std::string getName() = 0;
         virtual std::string getPath() = 0;

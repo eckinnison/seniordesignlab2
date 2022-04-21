@@ -6,6 +6,7 @@ class almondjoy{
 
         virtual std::string getName() = 0;
         virtual std::vector<Ingredient>* getIngredients() = 0;
+        virtual int fleet() = 0;
 
     private:
         std::string name;
